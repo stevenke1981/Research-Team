@@ -46,6 +46,7 @@ $RequiredFiles = @(
     "CLAUDE.md",
     "FAILURE_LOG.md",
     "TEAM.md",
+    "usage.md",
     "README.md",
     "lessons.md",
     "opencode.jsonc",

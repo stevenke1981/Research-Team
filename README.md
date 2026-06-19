@@ -19,6 +19,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/validate.ps1
 |------|---------|
 | `AGENTS.md` | Agent entrypoint and execution contract |
 | `TEAM.md` | Mission, rules, acceptance criteria |
+| `usage.md` | Codex and OpenCode activation steps |
 | `roles/` | Specialist agent briefs |
 | `workflows/` | Research lifecycle and study-specific workflows |
 | `policies/` | Citation, hallucination, evidence, review guardrails |
