@@ -18,3 +18,15 @@ Result:
 
 Action:
 - Changed the string to `${RelativePath}:$LineNumber`.
+
+## 2026-06-20 - OpenCode rejected Research Team metadata
+Attempt: Start OpenCode 1.17.8 from `D:\Research-Team`.
+
+Result:
+- OpenCode rejected `opencode.jsonc` because its custom root keys were not part of the official schema.
+- The existing validator only parsed JSON and therefore missed schema incompatibility.
+
+Action:
+- Replaced the custom metadata keys with the supported `instructions` array.
+- Added supported-key and instruction-pattern checks to `scripts/validate.ps1`.
+- Verified the repaired configuration manually with `opencode debug config --pure` and `opencode run --pure`.

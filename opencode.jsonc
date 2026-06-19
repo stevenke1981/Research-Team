@@ -1,41 +1,9 @@
 {
-  "team_mode": true,
-  "research_pipeline": true,
-  "peer_review_required": true,
-  "citation_verification": true,
-  "anti_hallucination": true,
-  "entrypoint": "AGENTS.md",
-  "charter": "TEAM.md",
-  "roles": [
-    "roles/orchestrator.md",
-    "roles/scholar-search.md",
-    "roles/literature-reviewer.md",
-    "roles/fact-checker.md",
-    "roles/methodology-reviewer.md",
-    "roles/statistician.md",
-    "roles/gap-finder.md",
-    "roles/peer-reviewer-1.md",
-    "roles/peer-reviewer-2.md",
-    "roles/area-chair.md",
-    "roles/academic-writer.md",
-    "roles/citation-manager.md",
-    "roles/thesis-supervisor.md",
-    "roles/rebuttal-writer.md"
-  ],
-  "workflows": [
-    "workflows/research-pipeline.md",
-    "workflows/PRISMA.md",
-    "workflows/SLR.md",
-    "workflows/META_ANALYSIS.md",
-    "workflows/REPRODUCIBILITY.md",
-    "workflows/BENCHMARK_STUDY.md",
-    "workflows/SURVEY.md",
-    "workflows/RSI.md"
-  ],
-  "policies": [
-    "policies/anti-hallucination.md",
-    "policies/evidence-grading.md",
-    "policies/citation-policy.md",
-    "policies/review-policy.md"
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "TEAM.md",
+    "roles/*.md",
+    "workflows/*.md",
+    "policies/*.md"
   ]
 }

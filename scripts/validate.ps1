@@ -92,14 +92,28 @@ if ($AgentsLineCount -gt 100) {
 
 $ConfigPath = Assert-File "opencode.jsonc"
 $Config = Get-Content -LiteralPath $ConfigPath -Raw | ConvertFrom-Json
-foreach ($RolePath in $Config.roles) {
-    Assert-File $RolePath | Out-Null
+$SupportedConfigKeys = @('$schema', 'instructions')
+$UnsupportedConfigKeys = @(
+    $Config.PSObject.Properties.Name | Where-Object { $_ -notin $SupportedConfigKeys }
+)
+if ($UnsupportedConfigKeys.Count -gt 0) {
+    throw "Unsupported opencode.jsonc keys: $($UnsupportedConfigKeys -join ', ')"
 }
-foreach ($WorkflowPath in $Config.workflows) {
-    Assert-File $WorkflowPath | Out-Null
+
+if ($Config.'$schema' -ne "https://opencode.ai/config.json") {
+    throw "opencode.jsonc must use the official OpenCode schema."
 }
-foreach ($PolicyPath in $Config.policies) {
-    Assert-File $PolicyPath | Out-Null
+
+if (-not $Config.instructions -or $Config.instructions.Count -eq 0) {
+    throw "opencode.jsonc must declare at least one instruction path or pattern."
+}
+
+foreach ($InstructionPattern in $Config.instructions) {
+    $ResolvedPattern = Resolve-ProjectPath $InstructionPattern
+    $Matches = @(Get-ChildItem -Path $ResolvedPattern -File -ErrorAction SilentlyContinue)
+    if ($Matches.Count -eq 0) {
+        throw "Instruction pattern matched no files: $InstructionPattern"
+    }
 }
 
 Write-Host "OK: Research-Team pack validated ($($RequiredFiles.Count) files, AGENTS.md $AgentsLineCount lines)."
