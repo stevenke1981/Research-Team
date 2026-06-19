@@ -1,5 +1,8 @@
 .opencode/memory.db*
 .opencode/tantivy/
 .opencode/vectors.usearch
+.opencode/status-footer/
+.opencode/node_modules/
 .codebase-memory/
+${PROJECT_ROOT}/
 *.zip
