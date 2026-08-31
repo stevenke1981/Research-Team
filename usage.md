@@ -1,10 +1,10 @@
 # Research-Team Usage
 
 ## Goal
-Let OpenCode or Codex use `D:\Research-Team` as the active research organization.
+Let Google Antigravity (`agy`), OpenCode, Claude Code, or Codex use `D:\Research-Team` as the active research organization.
 
 ## Recommended Mode
-Use global skill links. This makes Research-Team callable from any project without replacing global `AGENTS.md`, `config.toml`, or `opencode.jsonc`.
+Use global skill links. This makes Research-Team callable from any project without replacing global configuration files.
 
 ## Mode A: Use Inside This Project
 Open a terminal inside the project:
@@ -12,46 +12,33 @@ Open a terminal inside the project:
 ```powershell
 cd D:\Research-Team
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate.ps1
-opencode
 ```
 
-Or use Codex:
+- **Google Antigravity**:
+  ```powershell
+  agy
+  ```
+  Antigravity automatically loads `GEMINI.md`, `AGENTS.md`, and project skills.
 
-```powershell
-cd D:\Research-Team
-codex
-```
+- **OpenCode**:
+  ```powershell
+  opencode
+  ```
 
-When the current workspace is `D:\Research-Team`, OpenCode or Codex reads `AGENTS.md` and applies the Research-Team workflow.
+- **Codex**:
+  ```powershell
+  codex
+  ```
+
+When the current workspace is `D:\Research-Team`, the agent reads `GEMINI.md` / `AGENTS.md` and applies the Research-Team workflow.
 
 ## Mode B: Install As Global Skill
-Create the skill entrypoint:
-
-```powershell
-cd D:\Research-Team
-
-@'
----
-name: research-team
-description: Use when the task needs academic research, literature review, PRISMA, SLR, citation verification, peer review, thesis planning, meta-analysis, benchmark studies, or evidence synthesis.
----
-
-# Research-Team Skill
-
-Use this repository as the active research organization.
-
-1. Read AGENTS.md.
-2. Apply TEAM.md.
-3. Route work through roles/, workflows/, and policies/.
-4. Validate the pack with scripts/validate.ps1.
-'@ | Set-Content -Encoding UTF8 SKILL.md
-```
-
-Create junctions so Codex, OpenCode, and local agents use the same source:
+Create junctions so Antigravity, Codex, OpenCode, Claude Code, and local agents use the same source:
 
 ```powershell
 $src = "D:\Research-Team"
 $targets = @(
+  "$env:USERPROFILE\.gemini\config\skills\research-team",
   "$env:USERPROFILE\.codex\skills\research-team",
   "$env:USERPROFILE\.config\opencode\skills\research-team",
   "$env:USERPROFILE\.agents\skills\research-team"
@@ -72,12 +59,13 @@ Verify the install:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File D:\Research-Team\scripts\validate.ps1
+Get-Item $env:USERPROFILE\.gemini\config\skills\research-team
 Get-Item $env:USERPROFILE\.codex\skills\research-team
 Get-Item $env:USERPROFILE\.config\opencode\skills\research-team
 Get-Item $env:USERPROFILE\.agents\skills\research-team
 ```
 
-Restart Codex or OpenCode after creating the links.
+Restart Antigravity, Codex, or OpenCode after creating the links.
 
 Call the skill:
 

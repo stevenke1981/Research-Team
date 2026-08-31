@@ -44,6 +44,8 @@ if ($Path) {
 $RequiredFiles = @(
     "AGENTS.md",
     "CLAUDE.md",
+    "GEMINI.md",
+    "SKILL.md",
     "FAILURE_LOG.md",
     "TEAM.md",
     "usage.md",
